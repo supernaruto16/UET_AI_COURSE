@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Question 1:</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="project-2-multi-agent-search">Project 2: Multi-Agent Search</h1>
+<h2 id="question-1">Question 1:</h2>
+<ul>
+<li>Mục tiêu: Tối ưu cho Reflex Agent.</li>
+<li>Cách làm:
+<ul>
+<li>Viết lại hàm <code>evaluateFunction</code> để có phương thức đánh giá số điểm của game state sau khi chọn 1 action của Pacman tốt hơn.</li>
+<li>Thêm biến <code>bonus</code> là số lượng điểm cộng thêm vào số điểm mặc định của currentGameState</li>
+<li>Theo từng trường hợp mà bonus được tính như sau:
+<ul>
+<li>Nếu ghosts đang sợ hãi và số lượng nước đi còn lại &gt; 2:
+<ul>
+<li>Pacman ưu tiên việc đuổi và ăn ghosts hơn ăn food.</li>
+<li>Nếu khoảng cách từ pacman tới ghost gần nhất &lt;= 1. Pacman sẽ ăn ghost.</li>
+<li>Nếu không, duyệt lần lượt vị trí của từng food, tính tỉ lệ giữa khoảng cách từ pacman tới ghost ở xa nhất với khoảng cách từ pacman tới food gần nhất</li>
+<li>Bonus bằng giả trị lớn nhất của tỉ lệ nêu trên</li>
+</ul>
+<pre><code class="language-python"><div>bonus = max([manhattanDistance(food, next_pacman_pos) / max_ghost_dist <span class="hljs-keyword">for</span> food <span class="hljs-keyword">in</span> next_food_list])
+</div></code></pre>
+</li>
+<li>Nếu không:
+<ul>
+<li>Pacman ưu tiên việc ăn food ở xa hơn so với food ở gần ghost</li>
+<li>Nếu khoảng cách từ pacman tới ghost gần nhất &lt;= 1. Pacman sẽ chọn action khác.</li>
+<li>Nếu không, duyệt lần lượt vị trí của từng food, tính tỉ lệ giữa khoảng cách từ pacman tới food gần nhất với khoảng cách giữa pacman với ghost ở gần nhất</li>
+<li>Bonus bằng giả trị lớn nhất của tỉ lệ nêu trên</li>
+</ul>
+<pre><code class="language-python"><div>bonus = max([min_ghost_dist / manhattanDistance(food, next_pacman_pos) <span class="hljs-keyword">for</span> food <span class="hljs-keyword">in</span> next_food_list])
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="question-2">Question 2:</h2>
+<ul>
+<li>Mục tiêu: Áp dụng thuật toán Minimax cho pacman.</li>
+<li>Cách làm:
+<ul>
+<li>Tạo hàm <code>minimax_value</code> nhận các tham số:
+<ul>
+<li>game_state: game state hiện tại</li>
+<li>cur_depth: độ sâu cây minimax hiện tại</li>
+<li>cur_agent: agent hiện tại</li>
+</ul>
+</li>
+<li>Nếu agent là Pacman và độ sâu hiện tại bằng 1,hàm sẽ trả lại action tối ưu nhất.</li>
+<li>Nếu agent là pacman, hàm sẽ trả lại giá trị lớn nhất trong cấc nút con.<pre><code class="language-python"><div>best_score = max([self.minimax_value(next_game_state, next_depth, next_agent) <span class="hljs-keyword">for</span> next_game_state <span class="hljs-keyword">in</span> successor_game_state])
+</div></code></pre>
+</li>
+<li>Nếu agent là ghost, hàm sẽ trả lại giá trị nhỏ nhất trong các nút con.<pre><code class="language-python"><div>best_score = min([self.minimax_value(next_game_state, next_depth, next_agent) <span class="hljs-keyword">for</span> next_game_state <span class="hljs-keyword">in</span> successor_game_state])
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="question-3">Question 3:</h2>
+<ul>
+<li>Mục tiêu: Áp dụng thuật toán Alpha Beta Pruning cho pacman.</li>
+<li>Cách làm:
+<ul>
+<li>Tương tự <code>Question 2</code>. Tuy nhiên hàm <code>minimax_value</code> nhận 2 tham số:
+<ul>
+<li>alpha: Giá trị lớn nhất của các nút Max, khởi tạo = -INF</li>
+<li>beta: Giá trị lớn nhất của các nút Min, khởi tạo = INF</li>
+</ul>
+</li>
+<li>Nếu agent là pacman:
+<ul>
+<li>Duyệt tất cả các giá trị của game state tiếp theo</li>
+<li>Nếu xuất hiện 1 giá trị lớn hơn beta, dừng lại và trả về giá trị này</li>
+<li>Cập nhật <code>alpha = max(alpha, best_score)</code></li>
+<li>Sau khi duyệt hết, trả về giá trị lớn nhất</li>
+</ul>
+</li>
+<li>Nếu agent là ghost:
+<ul>
+<li>Duyệt tất cả các giá trị của game state tiếp theo</li>
+<li>Nếu xuất hiện 1 giá trị nhỏ hơn alpha, dừng lại và trả về giá trị này</li>
+<li>Cập nhật <code>beta = min(beta, best_score)</code></li>
+<li>Sau khi duyệt hết, trả về giá trị nhỏ nhất</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="question-4">Question 4:</h2>
+<ul>
+<li>Mục tiêu: Áp dụng thuật toán Expectimax cho pacman.</li>
+<li>Cách làm:
+<ul>
+<li>Tương tự <code>Question 2</code>.</li>
+<li>Tuy nhiên, nếu agent là ghost, giá trị trả về sẽ là expected value score của tất cả các trạng thái tiếp theo.<pre><code class="language-python"><div>best_score = sum(next_scores) / len(next_scores)
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+    </body>
+    </html>
