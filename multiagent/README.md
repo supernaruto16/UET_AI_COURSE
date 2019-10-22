@@ -12,9 +12,9 @@ Project 2: Multi-Agent Search
       + Nếu khoảng cách từ pacman tới ghost gần nhất <= 1. Pacman sẽ ăn ghost.
       + Nếu không, duyệt lần lượt vị trí của từng food, tính tỉ lệ giữa khoảng cách từ pacman tới ghost ở xa nhất với khoảng cách từ pacman tới food gần nhất
       + Bonus bằng giả trị lớn nhất của tỉ lệ nêu trên
-      ```python
-      bonus = max([manhattanDistance(food, next_pacman_pos) / max_ghost_dist for food in next_food_list])
-      ```
+    ```python
+    bonus = max([manhattanDistance(food, next_pacman_pos) / max_ghost_dist for food in next_food_list])
+    ```
     + Nếu không:
       + Pacman ưu tiên việc ăn food ở xa hơn so với food ở gần ghost
       + Nếu khoảng cách từ pacman tới ghost gần nhất <= 1. Pacman sẽ chọn action khác.
