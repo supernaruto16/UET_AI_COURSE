@@ -163,13 +163,13 @@ def enhancedPacmanFeatures(state, action):
     min_ghost_distance = min(ghosts_distance)
     min_ghost_scared_timer = min([ghost.scaredTimer for ghost in ghost_states])
     foods_distance = [util.manhattanDistance(food, pacman_pos) for food in foods]
-    capsules_distance = [util.manhattanDistance(capsule, pacman_pos) for capsule in capsules]
-
-    features['food_cnt'] = len(foods)
+    capsules_distance = [(util.manhattanDistance(capsule, pacman_pos), capsule) for capsule in capsules]
+    capsules_distance.sort()
+    # features['food_cnt'] = len(foods)
     if len(foods):
         features['min_food_distance'] = min(foods_distance)
 
-    features['zoned_ghost_cnt'] = sum([1 if util.manhattanDistance(ghost.getPosition(), pacman_pos) < 3
+    features['zoned_ghost_cnt'] = sum([1 if util.manhattanDistance(ghost.getPosition(), pacman_pos) < 2
                                         else 0 for ghost in ghost_states])
     features['scared_ghost_cnt'] = sum([1 if ghost.scaredTimer > 0 else 0 for ghost in ghost_states])
     features['min_ghost_distance'] = min_ghost_distance
@@ -180,8 +180,11 @@ def enhancedPacmanFeatures(state, action):
     features['stop'] = (action == 'Stop')
     features['hunter_mode'] = 0
     if len(capsules_distance):
-        min_capsule_distance = min(capsules_distance)
-        features['hunter_mode'] = (min_ghost_distance + min_capsule_distance) <= min_ghost_scared_timer
+        nearest_capsule = capsules_distance[0]
+        for ghost in ghost_states:
+            if util.manhattanDistance(nearest_capsule[1], ghost.getPosition()) + nearest_capsule[0]\
+                 <= ghost.scaredTimer:
+                features['hunter_mode'] = 1
     # util.raiseNotDefined()
     return features
 
