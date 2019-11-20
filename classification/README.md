@@ -1,6 +1,8 @@
 Project 5: Classification
 =============================
 
+[![asciicast](https://asciinema.org/a/rKzFnRyuI4D3jIwJ2pBowDw4K.png)](https://asciinema.org/a/rKzFnRyuI4D3jIwJ2pBowDw4K?speed=10)
+
 ## Question 1:
 + Mục tiêu: Xây dựng mô hình Perceptron cho bài toán nhận diện chữ số
 + Cách làm:
