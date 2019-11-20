@@ -13,6 +13,5 @@
 + Soultion: https://github.com/supernaruto16/UET_AI_COURSE/tree/master/multiagent
 
 ## Project 5: Classification
-## Project 2: Multi-Agent Search
 + Result : 25 / 25
 + Soultion: https://github.com/supernaruto16/UET_AI_COURSE/tree/master/classification
