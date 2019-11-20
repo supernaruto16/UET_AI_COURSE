@@ -1,9 +1,7 @@
 Project 5: Classification
 =============================
 
-[![asciicast](https://asciinema.org/a/rKzFnRyuI4D3jIwJ2pBowDw4K.png)](https://asciinema.org/a/rKzFnRyuI4D3jIwJ2pBowDw4K?speed=10)
-
-## Question 1:
+## Question 1 (4/4):
 + Mục tiêu: Xây dựng mô hình Perceptron cho bài toán nhận diện chữ số
 + Cách làm:
   + Với mỗi bộ traingdata, ta có vector feature(f) và `true_label` (y)
@@ -26,7 +24,7 @@ Project 5: Classification
         self.weights[true_label] = self.weights[true_label] + trainingData[i]
     ```
 
-## Question 2:
+## Question 2 (1/1):
 + Mục tiêu: Với mỗi label trả về top 100 features có trọng số (weight) lớn nhất
 + Cách làm:
   + sắp xếp lại vector weights của mỗi label theo thứ tự giảm dần giá trị của chúng (đã được tính từ Q1)
@@ -37,7 +35,7 @@ Project 5: Classification
     ```
   + Từ kết quả visualize thu được, có thể trả lời cho câu hỏi phụ là phương án a gần giống nhất với kết quả của mô hình Perceptron.
 
-## Question 3:
+## Question 3 (6/6):
 + Mục tiêu: Xây dựng mô hình MIRA cho bài toán nhận diện chữ số
 + Cách làm:
   + Với mỗi `C` từ `Cgrid` cho trước, làm tương tự với mô hình Perceptron ở Q1, tính được số điểm dự đoán của f với từng label
@@ -57,7 +55,7 @@ Project 5: Classification
     self.weights[true_label] = self.weights[true_label] + tf
     ```
 
-## Question 4:
+## Question 4 (6/6):
 + Mục tiêu: Xây dựng các feature mở rộng cho dataClassifier của bài toán nhận diện chữ số
 + Cách làm:
   + với từng datum, đếm số thành phần liên thông của các pixel có màu trắng (có giá trị = 0) bằng thuật toán DFS
@@ -92,7 +90,7 @@ Project 5: Classification
     features['has_gt5_connected_com'] = connected_component > 5
     ```
 
-## Question 5:
+## Question 5 (4/4):
 + Mục tiêu: Xây dựng mô hình Perceptron cho Pacman
 + Cách làm:
   + Tương tự như mô hình Perceptron ở Q1, tuy nhiên ở đây trainingData sẽ là các state, và các label là các legalAction của state. Các label đều đã có sẵn weight của riêng mình. Ta sẽ phải xây dựng 1 weight chung
@@ -109,7 +107,7 @@ Project 5: Classification
         self.weights = self.weights - data[0][max_label]
     ```
 
-## Question 6:
+## Question 6 (4/4):
 + Mục tiêu: Xây dựng các feature mở rộng cho dataClassfier cho pacman dựa trên hành vi của StopAgent, FoodAgent, SuicideAgent, ContestAgent
 + Cách làm:
   + với StopAgent, ta có `feature['stop']` mô phỏng hành vi dừng:
@@ -138,3 +136,5 @@ Project 5: Classification
             if util.manhattanDistance(nearest_capsule[1], ghost.getPosition()) + nearest_capsule[0] <= ghost.scaredTimer:
                 features['hunter_mode'] = 1
     ```
+
+[![asciicast](https://asciinema.org/a/rKzFnRyuI4D3jIwJ2pBowDw4K.svg)](https://asciinema.org/a/rKzFnRyuI4D3jIwJ2pBowDw4K?speed=10)

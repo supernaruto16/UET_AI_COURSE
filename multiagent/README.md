@@ -1,7 +1,7 @@
 Project 2: Multi-Agent Search
 =============================
 
-## Question 1:
+## Question 1 (4/4):
 + Mục tiêu: Tối ưu cho Reflex Agent.
 + Cách làm:
   + Viết lại hàm `evaluateFunction` để cải tiến phương thức đánh giá số điểm của game state sau khi chọn 1 action của Pacman.
@@ -24,7 +24,7 @@ Project 2: Multi-Agent Search
       bonus = max([min_ghost_dist / manhattanDistance(food, next_pacman_pos) for food in next_food_list])
       ``` 
 
-## Question 2:
+## Question 2 (5/5):
 + Mục tiêu: Áp dụng thuật toán Minimax cho pacman.
 + Cách làm:
   + Tạo hàm `minimax_value` nhận các tham số:
@@ -41,7 +41,7 @@ Project 2: Multi-Agent Search
     best_score = min([self.minimax_value(next_game_state, next_depth, next_agent) for next_game_state in successor_game_state])
     ```
 
-## Question 3:
+## Question 3 (5/5):
 + Mục tiêu: Áp dụng thuật toán Alpha Beta Pruning cho pacman.
 + Cách làm:
   + Tương tự `Question 2`. Tuy nhiên hàm `minimax_value` nhận 2 tham số:
@@ -58,7 +58,7 @@ Project 2: Multi-Agent Search
     + Cập nhật `beta = min(beta, best_score)`
     + Sau khi duyệt hết, trả về giá trị nhỏ nhất
 
-## Question 4:
+## Question 4 (5/5):
 + Mục tiêu: Áp dụng thuật toán Expectimax cho pacman.
 + Cách làm:
   + Tạo hàm `expectimax_value` tương tự hàm `minimax_value` ở `Question 2`.
@@ -68,6 +68,6 @@ Project 2: Multi-Agent Search
     best_score = sum(next_scores) / len(next_scores)
     ```
 
-## Question 5:
+## Question 5 (6/6):
 + Mục tiêu: Thiết kế hàm `evaluateFunction` để cải tiến phương thức đánh giá số điểm của game state hiện tại.
 + Sử dụng thuật toán tương tự hàm `evaluteFunction` ở `Question 1`.
