@@ -102,7 +102,9 @@ Project 1: Search
       path.push((nxtNode, curActions + [action], curCost + stepCost), priority)
   ```
 ## Question 5:
-+ Mục tiêu: Xây dựng hàm heuristic để cải thiện thuật toán A*
-+ Sử dụng thuật toán tương tự hàm `evaluteFunction` ở `Question 1`.
++ Mục tiêu: Xây dựng thuật toán giúp pacman tìm đường ngắn nhất đi qua 4 góc của mê cung 
++ Cách làm:
 
-[![asciicast](https://asciinema.org/a/S1wfyd5z6hF8r3To1T8bxUFJp.svg)](https://asciinema.org/a/S1wfyd5z6hF8r3To1T8bxUFJp?speed=0.6)
+
+[![asciicast](https://asciinema.org/a/1VPrz7M9avVfN8Vt98E6ipAaB.svg)](https://asciinema.org/a/1VPrz7M9avVfN8Vt98E6ipAaB?speed=0.25)
+

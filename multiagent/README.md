@@ -71,3 +71,5 @@ Project 2: Multi-Agent Search
 ## Question 5 (6/6):
 + Mục tiêu: Thiết kế hàm `evaluateFunction` để cải tiến phương thức đánh giá số điểm của game state hiện tại.
 + Sử dụng thuật toán tương tự hàm `evaluteFunction` ở `Question 1`.
+
+[![asciicast](https://asciinema.org/a/S1wfyd5z6hF8r3To1T8bxUFJp.svg)](https://asciinema.org/a/S1wfyd5z6hF8r3To1T8bxUFJp?speed=0.6)
